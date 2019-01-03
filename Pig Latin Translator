@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class PigLatin {
+
+	public static void main(String args[]) {
+		String pig = "";
+		char[] vowels = {'A', 'E', 'I', 'O', 'U'};
+		Scanner s = new Scanner(System.in);
+
+		System.out.println("Type a word or phrase you would like written in Pig Latin.");
+
+		String original = s.nextLine();
+		s.close();
+		String[] str = original.split("\\s+");
+		
+		for (int i = 0; i < str.length; i++) {
+			String temp = "";
+
+			for (int j = 0; j < vowels.length; j++) {
+				if (str[i].toUpperCase().charAt(0) == vowels[j]) {
+					temp += str[i] + "way";
+				}
+			} 
+
+			if (temp.length() == 0) {
+				for(int j = 0; j < vowels.length; j++) {
+					if(str[i].toUpperCase().charAt(1) == vowels[j]) {
+						temp += str[i].substring(1) + Character.toString(str[i].toLowerCase().charAt(0)) + "ay";
+					}
+				}
+
+				if (temp.length() == 0) {
+					temp += str[i].substring(2) + str[i].substring(0, 2) + "ay";
+				}
+			}
+			
+			pig += temp;
+			if (i != str.length - 1) {
+				pig += " ";
+			}
+		}
+
+		System.out.println("Original word(s): " + original);
+		System.out.println("Pig Latin word(s): " + pig);
+	}
+}
